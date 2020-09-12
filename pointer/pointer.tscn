@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://pointer/pointer.png" type="Texture" id=1]
+[ext_resource path="res://pointer/pointer.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "bounce"
+length = 3.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.0538704, 0.188876, 1.23081, -0.0402679, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.0490605, 0.125986, 1.15232, -0.0518116, -0.00292552, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 1 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "scale_in"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1e-05, -0.25, 0, 0.25, 0, 1, -0.245123, 0.0967317, 0.103111, -0.0144374, 1, -0.0555246, 0.00311565, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.6 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1e-05, -0.25, 0, 0.25, 0, 1, -0.221073, 0.711086, 0.0155713, -0.0436924, 1, -0.0536007, -0.00273538, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.6 )
+}
+
+[node name="pointer" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1.23081, 1.15232 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -12 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bounce = SubResource( 1 )
+anims/scale_in = SubResource( 2 )

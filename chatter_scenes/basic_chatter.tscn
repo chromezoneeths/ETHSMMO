@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://chatter_scenes/basic_border.png" type="Texture" id=1]
+[ext_resource path="res://chatter_scenes/basic-arrow.png" type="Texture" id=2]
+[ext_resource path="res://chatter_scenes/basic_chatter.gd" type="Script" id=3]
+[ext_resource path="res://assets/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "scale_in"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rect_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.1, -0.25, 0, 0.0913872, -0.339548, 1, -0.035503, 0.155705, 0.0174054, -0.0626824, 1, -0.0306482, -0.111213, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.3 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rect_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.1, -0.25, 0, 0.065414, -0.327415, 1, -0.0604693, 0.301297, 0.0174503, -0.0808812, 1, -0.0334892, -0.196141, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.4 )
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 18
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+
+[node name="basic_chatter" type="Control"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/scale_in = SubResource( 1 )
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+margin_left = 3.0
+margin_top = -67.0
+margin_right = 259.0
+margin_bottom = -3.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ReferenceRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="ReferenceRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = -6.0
+margin_bottom = -6.0
+grow_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ReferenceRect/MarginContainer"]
+margin_right = 244.0
+margin_bottom = 52.0
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+valign = 2
+autowrap = true
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 4, -4 )
+texture = ExtResource( 2 )
