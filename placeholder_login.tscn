@@ -22,13 +22,19 @@ onready var coll = get_node(\"CollisionShape2D\")
 
 var already_spoken = false
 
+var sounds = []
+
+func _ready():
+	for i in range(1,4):
+		sounds.push_back(load(\"res://assets/meow/\"+str(i)+\".wav\"))
+
 func _interact(interactor):
 	print(\"interacted with door\")
 	if already_spoken:
-		var chat = chatter.say(\"dude i already let you in\", null, load(\"res://chatter_scenes/basic_chatter.tscn\"), self, interactor)
+		var chat = chatter.say(\"dude i already let you in\", sounds, load(\"res://chatter_scenes/basic_chatter.tscn\"), self, interactor)
 		yield(chat, \"done\")
 	else:
-		var chat = chatter.say(\"you shall not pass\\nactually i'm feeling nice today come on in\", null, load(\"res://chatter_scenes/basic_chatter.tscn\"), self, interactor)
+		var chat = chatter.say(\"you shall not pass\\nactually i'm feeling nice today come on in\", sounds, load(\"res://chatter_scenes/basic_chatter.tscn\"), self, interactor)
 		yield(chat, \"done\")
 		sprite.animation = \"open\"
 		coll.disabled = true
@@ -64,11 +70,18 @@ script/source = "extends KinematicBody2D
 signal done_interacting
 
 onready var chatter = get_node(\"/root/Chatter\")
+onready var menu_man = get_node(\"/root/MenuMan\")
+
+var sound = [
+	load(\"res://assets/chat_beep.wav\")
+]
 
 func _interact(interactor):
 	print(\"Interacted with compute\")
-	var chat = chatter.say(\"hey go away man\\nim tryingn to vibe\", null, load(\"res://chatter_scenes/basic_chatter.tscn\"), self, interactor)
+	var chat = chatter.say(\"what's up gamers aaaaaaaaaaaaaaaaaaa\\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\naaa\", sound, load(\"res://chatter_scenes/basic_chatter.tscn\"), self, interactor)
 	yield(chat, \"done\")
+	#var menu = menu_man.open(load(\"res://menus/connect-menu/connect-menu.tscn\"))
+	#yield(menu, \"done\")
 	emit_signal(\"done_interacting\")
 "
 
